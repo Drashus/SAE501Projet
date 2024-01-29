@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="C:/xampp/htdocs/2021-2022/Fleuration_PROJETWEB2/Fleurs/Fleurs.sqlite" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="1"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="125"/><column_width id="3" width="2869"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,9:maincategorie"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="categorie" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="88"/><column index="2" value="129"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="SQL 1">BEGIN TRANSACTION;
+CREATE TABLE IF NOT EXISTS &quot;categorie&quot; (
+	&quot;cat_code&quot;	INTEGER,
+	&quot;cat_libelle&quot;	VARCHAR(50) NOT NULL,
+	PRIMARY KEY(&quot;cat_code&quot; AUTOINCREMENT)
+);
+CREATE TABLE IF NOT EXISTS &quot;produit&quot; (
+	&quot;pdt_ref&quot;	char(3) NOT NULL,
+	&quot;pdt_designation&quot;	VARCHAR(50) NOT NULL,
+	&quot;pdt_prix&quot;	DECIMAL(5, 2) NOT NULL,
+	&quot;pdt_image&quot;	VARCHAR(50) NOT NULL,
+	&quot;pdt_categorie&quot;	INTEGER NOT NULL,
+	CONSTRAINT &quot;fk_idC&quot; FOREIGN KEY(&quot;pdt_categorie&quot;) REFERENCES &quot;categorie&quot;(&quot;cat_code&quot;) ON DELETE CASCADE ON UPDATE CASCADE,
+	PRIMARY KEY(&quot;pdt_ref&quot;)
+);
+CREATE TABLE IF NOT EXISTS &quot;utilisateurs&quot; (
+	&quot;pseudo&quot;	VARCHAR NOT NULL,
+	&quot;pass&quot;	VARCHAR NOT NULL,
+	&quot;statut&quot;	VARCHAR NOT NULL DEFAULT 'VISITEUR',
+	PRIMARY KEY(&quot;pseudo&quot;)
+);
+INSERT INTO &quot;categorie&quot; VALUES (1,'Bulbes');
+INSERT INTO &quot;categorie&quot; VALUES (2,'Plantes à massif');
+INSERT INTO &quot;categorie&quot; VALUES (3,'Rosiers');
+INSERT INTO &quot;produit&quot; VALUES ('b01','3 bulbes de bégonias',5,'bulbes_begonia',1);
+INSERT INTO &quot;produit&quot; VALUES ('b02','10 bulbes de dahlias',12,'bulbes_dahlia',1);
+INSERT INTO &quot;produit&quot; VALUES ('b03','50 glaïeuls',9,'bulbes_glaieul',1);
+INSERT INTO &quot;produit&quot; VALUES ('m01','Lot de 3 marguerites',5,'massif_marguerite',2);
+INSERT INTO &quot;produit&quot; VALUES ('m02','Pour un bouquet de 6 pensées',6,'massif_pensee',2);
+INSERT INTO &quot;produit&quot; VALUES ('m03','Mélange varié de 10 plantes à massif',15,'massif_melange',2);
+INSERT INTO &quot;produit&quot; VALUES ('r01','1 pied spécial grandes fleurs',20,'rosiers_gdefleur',3);
+INSERT INTO &quot;produit&quot; VALUES ('r02','Une variété sélectionnée pour son parfum',9,'rosiers_parfum',3);
+INSERT INTO &quot;produit&quot; VALUES ('r03','Rosier arbuste',8,'rosiers_arbuste',3);
+INSERT INTO &quot;utilisateurs&quot; VALUES ('admin','admin','administrateur');
+INSERT INTO &quot;utilisateurs&quot; VALUES ('toto','lannion','employés');
+INSERT INTO &quot;utilisateurs&quot; VALUES ('visiteur','lannion','visiteur');
+INSERT INTO &quot;utilisateurs&quot; VALUES ('admin@admin.fr','admin','administrateur');
+COMMIT;
+</sql><current_tab id="0"/></tab_sql></sqlb_project>

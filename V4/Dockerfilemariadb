@@ -1,0 +1,4 @@
+# Dockerfile pour migrer la base de données vers MariaDB
+FROM mariadb:latest
+COPY Projet/Fleurs/user.sqlite /docker-entrypoint-initdb.d/
+RUN chown www-data:www-data /docker-entrypoint-initdb.d/

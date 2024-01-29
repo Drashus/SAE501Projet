@@ -1,0 +1,14 @@
+# Version python
+FROM python:3.9
+
+# Répertoire travail
+WORKDIR /app
+
+# transfert fichier nécessaire
+COPY api/requirements.txt /app
+
+# Installation dépendance
+RUN pip install --no-cache-dir --upgrade -r /app/requirements.txt
+
+# Commande pour exécuter les applications avec Uvicorn
+CMD ["uvicorn", "api.main:app","--host","0.0.0.0","--reload"]

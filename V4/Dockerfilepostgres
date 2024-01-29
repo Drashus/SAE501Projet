@@ -1,0 +1,5 @@
+# Dockerfile pour migrer la base de données depuis PostgreSQL
+FROM postgres:latest
+COPY Projet/Fleurs/Fleurs.sqlite /docker-entrypoint-initdb.d/
+RUN chown www-data:www-data /docker-entrypoint-initdb.d/
+
