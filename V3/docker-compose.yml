@@ -1,0 +1,32 @@
+version: '3.3'
+services:
+  php:
+    image: php:apache
+    ports:
+      - 8080:80
+    volumes:
+      - /home/debian/Téléchargements/V3/Projet:/var/www/html/ # déclaration du volume
+
+  migrate-to-mariadb:
+    build:
+      context: .
+      dockerfile: Dockerfilemariadb 
+    environment:
+      MYSQL_ROOT_PASSWORD: lannion
+
+
+  migrate-to-postgresql:
+    build:
+      context: .
+      dockerfile: Dockerfilepostgres
+    environment:
+      POSTGRES_PASSWORD: lannion
+
+  uvicorn-app:
+    build:
+      context: .
+      dockerfile: Dockerfileuvicorn
+    ports:
+      - "8090:8000"
+    volumes:
+      - .:/app/
